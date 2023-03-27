@@ -4,11 +4,13 @@ using OrdersApiAppSPD011.Service.ClientService;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
 builder.Services.AddTransient<IDaoClient, DbDaoClient>();
 builder.Services.AddTransient<IDaoProduct, DbDaoProduct>();
 builder.Services.AddDbContext<ApplicationDbContext>();
 
 var app = builder.Build();
+app.MapControllers();
 
 app.MapGet("/ping", () => new {Time = DateTime.Now, Message = "pong"});
 
@@ -39,7 +41,7 @@ app.MapPost("/client/update", async (Client client, IDaoClient daoClient) =>
 
 // Product
 
-app.MapGet("/product/all", async (IDaoProduct daoProduct) =>
+/*app.MapGet("/product/all", async (IDaoProduct daoProduct) =>
 {
     return await daoProduct.GetAllAsync();
 });
@@ -62,7 +64,7 @@ app.MapGet("/product/find", async (int id, IDaoProduct daoProduct) =>
 app.MapPost("/product/update", async (Product product, IDaoProduct daoProduct) =>
 {
     return await daoProduct.UpdateAsync(product);
-});
+});*/
 
 
 app.Run();
