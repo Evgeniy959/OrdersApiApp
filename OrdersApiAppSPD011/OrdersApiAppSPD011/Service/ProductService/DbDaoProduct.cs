@@ -5,7 +5,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OrdersApiAppSPD011.Service.ClientService
 {
-    public class DbDaoProduct : IDaoProduct
+    public class DbDaoProduct : IDaoEntity<Product> 
     {
         private readonly ApplicationDbContext db;
         public DbDaoProduct(ApplicationDbContext db) 
@@ -26,8 +26,9 @@ namespace OrdersApiAppSPD011.Service.ClientService
             {
                 db.Products.Remove(product);
                 await db.SaveChangesAsync();
+                return product;
             }
-            return product;
+            else return null;
         }
 
         public async Task<List<Product>> GetAllAsync()

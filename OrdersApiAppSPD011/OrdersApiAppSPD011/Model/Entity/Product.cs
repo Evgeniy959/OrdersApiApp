@@ -1,4 +1,6 @@
-﻿namespace OrdersApiAppSPD011.Model.Entity
+﻿using System.Text.Json.Serialization;
+
+namespace OrdersApiAppSPD011.Model.Entity
 {
     public class Product
     {
